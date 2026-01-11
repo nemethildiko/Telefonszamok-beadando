@@ -23,9 +23,10 @@ namespace Telefonszamok_Alap
                     "Hibás felhasználónév vagy jelszó!",
                     "Bejelentkezési hiba",
                     MessageBoxButton.OK,
-                    MessageBoxImage.Error
-                );
+                    MessageBoxImage.Error);
             }
         }
+
     }
 }
+

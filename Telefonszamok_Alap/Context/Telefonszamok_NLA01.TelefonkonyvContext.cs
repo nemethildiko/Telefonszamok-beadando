@@ -47,7 +47,12 @@ namespace cnTelefonkonyv
                 (!optionsBuilder.Options.Extensions.OfType<RelationalOptionsExtension>().Any(ext => !string.IsNullOrEmpty(ext.ConnectionString) || ext.Connection != null) &&
                  !optionsBuilder.Options.Extensions.Any(ext => !(ext is RelationalOptionsExtension) && !(ext is CoreOptionsExtension))))
             {
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Telefonszamok;Integrated Security=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer(
+    @"Data Source=(localdb)\MSSQLLocalDB;
+      Initial Catalog=Telefonszamok;
+      Integrated Security=True;
+      TrustServerCertificate=True;");
+
             }
             CustomizeConfiguration(ref optionsBuilder);
             base.OnConfiguring(optionsBuilder);
