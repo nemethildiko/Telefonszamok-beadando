@@ -9,6 +9,32 @@ namespace Telefonszamok_Alap
     public partial class MainWindow : Window
     {
         TelefonkonyvContext cn = new TelefonkonyvContext();
+        private void BtnTelefonszamHozzaadas_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSzemelyek.SelectedItem == null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(tbUjTelefonszam.Text))
+                return;
+
+            var szemely = dgSzemelyek.SelectedItem as enSzemely;
+
+            enTelefonszam uj = new enTelefonszam
+            {
+                Szam = tbUjTelefonszam.Text,
+                enSzemelyid = szemely.id
+            };
+
+            cn.enTelefonszamok.Add(uj);
+            cn.SaveChanges();
+
+            dgTelefonszamok.ItemsSource = cn.enTelefonszamok
+                .Where(t => t.enSzemelyid == szemely.id)
+                .ToList();
+
+            tbUjTelefonszam.Clear();
+        }
+
 
         public MainWindow()
         {
