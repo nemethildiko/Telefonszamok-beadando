@@ -1,10 +1,27 @@
 ﻿<Window x:Class="Telefonszamok_Alap.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Telefonkönyv" Height="450" Width="800">
+        Title="Telefonkönyv" Height="450" Width="900">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
         <DataGrid x:Name="dgSzemelyek"
+                  Grid.Column="0"
                   AutoGenerateColumns="True"
+                  SelectionChanged="dgSzemelyek_SelectionChanged"
                   Margin="10"/>
+
+        <DataGrid x:Name="dgTelefonszamok"
+                  Grid.Column="1"
+                  AutoGenerateColumns="False"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding id}" />
+                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Szam}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
