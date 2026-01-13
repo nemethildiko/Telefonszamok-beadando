@@ -94,8 +94,37 @@ namespace Telefonszamok_Alap
         {
             if (dgSzemelyek.SelectedItem is enSzemely sz)
             {
+                tbVezeteknev.Text = sz.Vezeteknev;
+                tbUtonev.Text = sz.Utonev;
+                tbLakcim.Text = sz.Lakcim;
+                cbHelyseg.SelectedValue = sz.enHelysegid;
+
                 dgTelefonszamok.ItemsSource = sz.enTelefonszamok.ToList();
             }
         }
+        private void BtnSzemelyModositas_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSzemelyek.SelectedItem == null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(tbVezeteknev.Text) ||
+                string.IsNullOrWhiteSpace(tbUtonev.Text) ||
+                cbHelyseg.SelectedItem == null)
+                return;
+
+            var szemely = dgSzemelyek.SelectedItem as enSzemely;
+
+            szemely.Vezeteknev = tbVezeteknev.Text;
+            szemely.Utonev = tbUtonev.Text;
+            szemely.Lakcim = tbLakcim.Text;
+            szemely.enHelysegid = (int)cbHelyseg.SelectedValue;
+
+            cn.SaveChanges();
+
+            dgSzemelyek.ItemsSource = cn.enSzemelyek
+                .Include(x => x.enTelefonszamok)
+                .ToList();
+        }
+
     }
 }

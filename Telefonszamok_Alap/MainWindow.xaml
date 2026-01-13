@@ -45,6 +45,11 @@
                 <Button Content="Új személy felvétele"
                 Width="160"
                 Click="BtnUjSzemely_Click"/>
+                <Button Content="Személy módosítása"
+                Width="200"
+                Margin="0,5,0,0"
+                Click="BtnSzemelyModositas_Click"/>
+
             </StackPanel>
         </Grid>
 
