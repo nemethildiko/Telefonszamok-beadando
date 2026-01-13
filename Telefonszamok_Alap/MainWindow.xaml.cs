@@ -50,6 +50,29 @@ namespace Telefonszamok_Alap
                 .Where(t => t.enSzemelyid == szemely.id)
                 .ToList();
         }
+        private void BtnUjSzemely_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbVezeteknev.Text) ||
+                string.IsNullOrWhiteSpace(tbUtonev.Text))
+                return;
+
+            enSzemely uj = new enSzemely
+            {
+                Vezeteknev = tbVezeteknev.Text,
+                Utonev = tbUtonev.Text,
+                Lakcim = tbLakcim.Text,
+                enHelysegid = 1
+            };
+
+            cn.enSzemelyek.Add(uj);
+            cn.SaveChanges();
+
+            dgSzemelyek.ItemsSource = cn.enSzemelyek.ToList();
+
+            tbVezeteknev.Clear();
+            tbUtonev.Clear();
+            tbLakcim.Clear();
+        }
 
 
         public MainWindow()
