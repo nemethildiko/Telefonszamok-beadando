@@ -34,6 +34,22 @@ namespace Telefonszamok_Alap
 
             tbUjTelefonszam.Clear();
         }
+        private void BtnTelefonszamTorles_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgTelefonszamok.SelectedItem == null)
+                return;
+
+            var telefonszam = dgTelefonszamok.SelectedItem as enTelefonszam;
+
+            cn.enTelefonszamok.Remove(telefonszam);
+            cn.SaveChanges();
+
+            var szemely = dgSzemelyek.SelectedItem as enSzemely;
+
+            dgTelefonszamok.ItemsSource = cn.enTelefonszamok
+                .Where(t => t.enSzemelyid == szemely.id)
+                .ToList();
+        }
 
 
         public MainWindow()
