@@ -55,13 +55,16 @@ namespace Telefonszamok_Alap
             if (string.IsNullOrWhiteSpace(tbVezeteknev.Text) ||
                 string.IsNullOrWhiteSpace(tbUtonev.Text))
                 return;
+            if (cbHelyseg.SelectedItem == null)
+                return;
 
             enSzemely uj = new enSzemely
             {
                 Vezeteknev = tbVezeteknev.Text,
                 Utonev = tbUtonev.Text,
                 Lakcim = tbLakcim.Text,
-                enHelysegid = 1
+                enHelysegid = (int)cbHelyseg.SelectedValue
+
             };
 
             cn.enSzemelyek.Add(uj);
@@ -72,6 +75,8 @@ namespace Telefonszamok_Alap
             tbVezeteknev.Clear();
             tbUtonev.Clear();
             tbLakcim.Clear();
+            cbHelyseg.SelectedIndex = -1;
+
         }
 
 
@@ -82,6 +87,7 @@ namespace Telefonszamok_Alap
             dgSzemelyek.ItemsSource = cn.enSzemelyek
                 .Include(x => x.enTelefonszamok)
                 .ToList();
+            cbHelyseg.ItemsSource = cn.enHelysegek.ToList();
         }
 
         private void dgSzemelyek_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

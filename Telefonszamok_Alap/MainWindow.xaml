@@ -27,6 +27,12 @@
                 <TextBox x:Name="tbUtonev" Margin="0,0,0,5"/>
                 <TextBox x:Name="tbLakcim" Margin="0,0,0,5"/>
 
+                <ComboBox x:Name="cbHelyseg"
+          DisplayMemberPath="Nev"
+          SelectedValuePath="id"
+          Margin="0,0,0,5"/>
+
+
                 <Button Content="Új személy felvétele"
                 Width="160"
                 Click="BtnUjSzemely_Click"/>
